@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@addapptables/modal": [
+        "dist/addapptables/modal"
+      ],
+      "@addapptables/modal/*": [
+        "dist/addapptables/modal/*"
+      ]
+    }
   }
 }

@@ -1,9 +1,11 @@
 # ADDAPPTABLES modal
 
+ADDAPPTABLES modal is a library for angular
+
 [See demo](http://addapptables.com/admin/ecommerce/products)
 
 ## Getting Started
-To get started, lets install the package thru npm:
+To get started, let's install the package through npm:
 
 ```
 npm i @addapptables/modal --S
@@ -22,6 +24,8 @@ perfect-scrollbar
 
 ## How to use
 
+- Import the module AlertModule into the AppModule
+
 ```typescript
 import { ModalModule } from '@addapptables/modal';
 @NgModule({
@@ -30,34 +34,16 @@ import { ModalModule } from '@addapptables/modal';
 export class AppModule { }
 ```
 
-```html
-<addapptable-modal>
-  <addapptable-modal-header>
-    <h3 class="text-accent">{{'product.create' | translate}}</h3>
-    <button mat-icon-button (click)="close()">
-      <mat-icon suffix>close</mat-icon>
-    </button>
-  </addapptable-modal-header>
-  <addapptable-modal-body>
-    //modal body
-  </addapptable-modal-body>
-  <addapptable-modal-footer>
-    <button type="submit" mat-raised-button color="accent">
-      {{'general.save' | translate}}
-    </button>
-    <button type="button" mat-raised-button (click)="close()">{{'general.close' | translate}}</button>
-  </addapptable-modal-footer>
-</addapptable-modal>
-```
+- Create a component modal
 
 ```typescript
 @Component({
 ...
 })
-export class ProductFormModalComponent {
+export class FormModalComponent {
 
   constructor(
-    private _dialogRef: MatDialogRef<ProductFormModalComponent>,
+    private _dialogRef: MatDialogRef<FormModalComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -68,13 +54,33 @@ export class ProductFormModalComponent {
 }
 ```
 
+```html
+<addapptable-modal>
+  <addapptable-modal-header>
+    <h3 class="text-accent">Title</h3>
+    <button mat-icon-button (click)="close()">
+      <mat-icon suffix>close</mat-icon>
+    </button>
+  </addapptable-modal-header>
+  <addapptable-modal-body>
+    //modal body
+  </addapptable-modal-body>
+  <addapptable-modal-footer>
+    <button type="submit" mat-raised-button color="accent">
+      Save
+    </button>
+    <button type="button" mat-raised-button (click)="close()">Close</button>
+  </addapptable-modal-footer>
+</addapptable-modal>
+```
+
 ```typescript
 import { ModalModule } from '@addapptables/modal';
 
 @NgModule({
   imports: [ModalModule],
   entryComponents: [
-    ProductFormModalComponent // this line is important
+    FormModalComponent // this line is important
   ]
 })
 export class OtherModule { }
@@ -90,8 +96,8 @@ export class ProductListComponent {
     private _modalService: ModalService
   ) { }
 
-  createProduct() {
-    this._modalService.show(ProductFormModalComponent);
+  showModal() {
+    this._modalService.show(FormModalComponent);
   }
 }
 ```
